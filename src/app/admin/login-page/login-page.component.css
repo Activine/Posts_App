@@ -1,0 +1,27 @@
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bi {
+  display: block;
+  width: 30px;
+  height: 30px;
+
+}
+
+.show {
+  display: inline-block;
+  position: absolute;
+  padding: 0;
+  right: 0;
+  top: 15px;
+}
+
+.show-wrap {
+  position: relative;
+}
+
+.not-active {
+  cursor: default;
+}

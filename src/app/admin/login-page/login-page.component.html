@@ -1,0 +1,92 @@
+<div class="register-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="alert btn-primary" *ngIf="auth.error$ | async as error">
+      {{error}}
+    </div>
+
+    <div class="alert btn-warning" *ngIf="message">
+      {{message}}
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        type="text"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': f['email'].touched && f['email'].errors }"
+      />
+      <div *ngIf=" f['email'].errors" class="text-danger">
+        <div *ngIf="f['email'].touched && f['email'].errors['required']">Email is required</div>
+        <div *ngIf="f['email'].touched && f['email'].errors['email']">Email is invalid</div>
+      </div>
+    </div>
+
+    <div class="form-group show-wrap">
+      <label>Password</label>
+      <input
+        [type]="user.showPassword ? 'text' : 'password'"
+        formControlName="password"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].errors }"
+      />
+      <button type="button" class="btn btn-outline-secondary show" (click)="user.showPassword = !user.showPassword">
+        <svg *ngIf="user.showPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill show" viewBox="0 0 16 16">
+          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+          <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+        </svg>
+        <svg *ngIf="!user.showPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill show" viewBox="0 0 16 16">
+          <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+          <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+        </svg>
+      </button>
+      <div *ngIf=" f['password'].errors" class="text-danger">
+        <div *ngIf="f['password'].touched && f['password'].errors['required']">Password is required</div>
+        <div *ngIf="f['password'].touched && f['password'].errors['minlength']">
+          Password must be at least 6 characters. Now it is {{f['password'].errors['minlength'].actualLength}}
+        </div>
+        <div *ngIf="f['password'].errors['maxlength']">
+          Username must not exceed 40 characters. Now it is {{f['password'].errors['maxlength'].actualLength}}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group form-check">
+      <input
+        type="checkbox"
+        formControlName="acceptTerms"
+        class="form-check-input"
+        [ngClass]="{ 'is-invalid': f['acceptTerms'].errors }"
+      />
+      <label for="acceptTerms" class="form-check-label"
+        >I have read and agree to the Terms</label
+      >
+      <div
+        *ngIf="f['acceptTerms'].touched && f['acceptTerms'].errors"
+        class="text-danger"
+      >
+        Accept Terms is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button
+        type="submit"
+        class="btn"
+        [ngClass]="form.invalid ? 'btn-warning not-active' : 'btn-primary'"
+        [disabled]="form.invalid || submitted"
+      >
+        Register
+      </button>
+      <button
+        type="button"
+        (click)="onReset()"
+        class="btn btn-warning"
+      >
+        Reset
+      </button>
+    </div>
+
+  </form>
+</div>

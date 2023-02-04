@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>Create Post</h2>
+
+  <div class="form-group">
+    <label>Title</label>
+    <input
+      type="text"
+      formControlName="title"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': f['title'].touched && f['title'].errors }"
+    />
+    <div *ngIf=" f['title'].errors" class="text-danger">
+      <div *ngIf="f['title'].touched && f['title'].errors['required']">Please enter post title</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Text</label>
+    <quill-editor name="editor" formControlName="text"></quill-editor>
+  </div>
+
+  <div class="form-group">
+    <label>Author</label>
+    <input
+      type="text"
+      formControlName="author"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': f['author'].touched && f['author'].errors }"
+    />
+    <div *ngIf=" f['author'].errors" class="text-danger">
+      <div *ngIf="f['author'].touched && f['author'].errors['required']">Please enter post author</div>
+    </div>
+  </div>
+
+  <button
+  class="btn"
+    [ngClass]="form.invalid ? 'btn-warning not-active' : 'btn-dark'"
+    type="submit"
+    [disabled]="form.invalid"
+  >Create Post</button>
+</form>
