@@ -13,7 +13,7 @@ export interface FbAuthResponse {
 
 
 export interface Post {
-  id: string,
+  id?: string,
   title: string,
   author: string,
   text: string,
@@ -22,4 +22,11 @@ export interface Post {
 
 export interface FBCreateResponse {
   name: string
+}
+
+export type AlertType = 'success' | 'warning' | 'danger'
+
+export interface Alert {
+  type: AlertType;
+  text: string;
 }

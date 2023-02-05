@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
 import { Post } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/posts.service';
+import { AlertService } from '../shared/services/alert.service';
 
 @Component({
   selector: 'app-edit-page',
@@ -22,6 +23,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private postsService: PostsService,
     private formBuilder: FormBuilder,
+    private alertService: AlertService
   ) { }
 
   get f(): { [key: string]: AbstractControl } {
@@ -42,6 +44,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
       date: new Date()
     }).subscribe(() => {
       this.submitted = false
+      this.alertService.success('Refactored post')
     })
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostsService } from 'src/app/shared/posts.service';
 import { Post } from '../../shared/interfaces';
+import { AlertService } from '../shared/services/alert.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class CreatePageComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    private postService: PostsService
+    private postService: PostsService,
+    private alertService: AlertService
   ) {}
 
   get f(): { [key: string]: AbstractControl } {
@@ -30,10 +32,10 @@ export class CreatePageComponent implements OnInit{
       author: this.form.value.author,
       date: new Date(),
       text: this.form.value.text,
-      id: ''
     }
     this.postService.create(post).subscribe(() => {
       this.form.reset()
+      this.alertService.success('Post Added')
     })
   }
 

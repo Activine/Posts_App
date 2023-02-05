@@ -7,39 +7,37 @@ import { FBCreateResponse, Post } from "./interfaces";
 @Injectable({
   providedIn: 'root'
 })
-export class PostsService{
-  constructor(private http: HttpClient) {}
+export class PostsService {
+  constructor(private http: HttpClient) { }
 
   create(post: Post): Observable<any> {
     return this.http.post<any>(`${environment.FBDbUrl}/posts.json`, post)
-      .pipe(
-        map((res: FBCreateResponse) => {
-          console.log(res);
-
-          return {
-            ...post,
-            // id: res.name,
-            // date: new Date(post.date)
-          }
-        }),
-        tap(()=>{
-          console.log(post);
-        })
-      )
+      // .pipe(
+      //   map((res: FBCreateResponse) => {
+      //     console.log('create response', res);
+      //     console.log(post.id);
+      //     return {
+      //       ...post,
+      //       id: res.name,
+      //       date: new Date(post.date)
+      //     }
+      //   }),
+      //   tap((res) => console.log(res))
+      // )
   }
 
-  getAll(): Observable<any>{
+  getAll(): Observable<any> {
     return this.http.get(`${environment.FBDbUrl}/posts.json`)
-    .pipe(
-      map((response: {[key: string]: any}) => {
-        // console.log(response);
-        // console.log(Object.keys(response));
-        return Object.keys(response).map((key: string) => ({
-          ...response[key],
-          id: key,
-          date: new Date(response[key].date)
-        }));
-    }))
+      .pipe(
+        map((response: { [key: string]: any }) => {
+          console.log('getAll resp', response);
+          // console.log(Object.keys(response));
+          return Object.keys(response).map((key: string) => ({
+            ...response[key],
+            id: key,
+            date: new Date(response[key].date)
+          }));
+        }))
   }
 
   delete(id: string): Observable<Post> {
@@ -50,8 +48,7 @@ export class PostsService{
     return this.http.get<Post>(`${environment.FBDbUrl}/posts/${id}.json`)
       .pipe(map((post: Post) => {
         return {
-          ...post,
-          id: post.id,
+          ...post, id,
           date: new Date(post.date)
         }
       }))
@@ -59,5 +56,11 @@ export class PostsService{
 
   update(post: Post): Observable<Post> {
     return this.http.patch<Post>(`${environment.FBDbUrl}/posts/${post.id}.json`, post)
+      .pipe(
+        tap(() => {
+          console.log('update', post);
+
+        })
+      )
   }
 }
