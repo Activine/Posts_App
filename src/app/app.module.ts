@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { registerLocaleData } from '@angular/common';
 import enLocale from '@angular/common/locales/en-BE';
+import { QuillModule } from "ngx-quill";
 
 
 registerLocaleData(enLocale, 'en')
@@ -28,12 +29,13 @@ const INTERCEPTOR_PROVIDER: Provider = {
     MainLayoutComponent,
     HomePageComponent,
     PostPageComponent,
-    PostComponent
+    PostComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    // QuillModule.forRoot()
   ],
   providers: [INTERCEPTOR_PROVIDER ],
   bootstrap: [AppComponent],

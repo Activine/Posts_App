@@ -13,6 +13,7 @@ import { QuillModule } from "ngx-quill";
 import { SearchPipe } from "./shared/search.pipe";
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { AlertService } from "./shared/services/alert.service";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { AlertService } from "./shared/services/alert.service";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    QuillModule.forRoot(),
+    SharedModule,
     RouterModule.forChild([
       {
         path: '', component: AdminLayoutComponent, children: [
