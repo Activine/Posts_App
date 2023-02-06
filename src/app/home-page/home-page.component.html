@@ -3,10 +3,12 @@
   *ngIf="posts$ | async as posts; else loading"
 >
   <app-post
-    *ngFor="let post of posts"
+    *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: p }"
     [post]="post"
   ></app-post>
+  <pagination-controls (pageChange)="p = $event" class="paginator" previousLabel="Prev"></pagination-controls>
 </div>
+
 
 <ng-template #loading>
   <p class="text-center">Loading...</p>

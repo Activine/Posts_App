@@ -13,6 +13,7 @@ import { AuthInterceptor } from './shared/auth.interceptor';
 import { registerLocaleData } from '@angular/common';
 import enLocale from '@angular/common/locales/en-BE';
 import { QuillModule } from "ngx-quill";
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 registerLocaleData(enLocale, 'en')
@@ -35,6 +36,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    NgxPaginationModule
     // QuillModule.forRoot()
   ],
   providers: [INTERCEPTOR_PROVIDER ],

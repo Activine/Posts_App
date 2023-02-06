@@ -10,6 +10,8 @@ import { PostsService } from '../shared/posts.service';
 })
 export class HomePageComponent implements OnInit{
   public posts$: Observable<Post[]>
+  public p: number
+  public arrow: boolean = false
 
   constructor(
     private postsService: PostsService
