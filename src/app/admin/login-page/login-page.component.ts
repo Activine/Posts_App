@@ -25,6 +25,7 @@ export class LoginPageComponent implements OnInit{
     acceptTerms: new FormControl(false),
   });
   message: string
+  forgot: boolean = false
 
   constructor(
     private formBuilder: FormBuilder,

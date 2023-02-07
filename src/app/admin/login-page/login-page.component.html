@@ -70,6 +70,10 @@
       </div>
     </div>
 
+    <div (click)="forgot = !forgot">
+      <a *ngIf="!forgot; else showData" >Forgot your password?</a>
+    </div>
+
     <div class="form-group">
       <button
         type="submit"
@@ -90,3 +94,8 @@
 
   </form>
 </div>
+
+<ng-template #showData (click)="forgot = !forgot" class="">
+  <a>admin@gmail.com 123456</a>
+</ng-template>
+

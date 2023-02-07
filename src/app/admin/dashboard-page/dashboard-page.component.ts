@@ -20,6 +20,8 @@ constructor(
   pSub: Subscription;
   pDel: Subscription;
   searchStr: string = '';
+  public currentPage: number
+  itemsPerPage: number = 5
 
   delete(id: string | undefined) {
     if (id) {
@@ -33,7 +35,7 @@ constructor(
 
   show(e: Post) {
     console.log(e);
-
+    console.log(this.currentPage);
   }
 
   ngOnInit(): void {
@@ -41,8 +43,10 @@ constructor(
       console.log(date);
       this.posts = date
       console.log(this.posts);
-
     })
+    if(!this.currentPage) {
+      this.currentPage = 1
+    }
   }
 
   ngOnDestroy(): void {

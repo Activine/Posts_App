@@ -6,7 +6,7 @@
     *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: p }"
     [post]="post"
   ></app-post>
-  <pagination-controls (pageChange)="p = $event" class="paginator" previousLabel="Prev"></pagination-controls>
+  <pagination-controls (pageChange)="p = $event" class="paginator" previousLabel="" nextLabel=""></pagination-controls>
 </div>
 
 
